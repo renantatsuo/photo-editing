@@ -3,14 +3,15 @@ import { Typography } from 'antd'
 
 import { SettingsRow, PropSlider } from '../Common'
 
-export default function SaturationController({
+const SaturationController = ({
   contrast,
   setContrast,
   brightness,
   setBrightness,
   saturation,
-  setSaturation
-}) {
+  setSaturation,
+  disabled
+}) => {
   return (
     <>
       <SettingsRow>
@@ -21,6 +22,7 @@ export default function SaturationController({
       </SettingsRow>
       <SettingsRow>
         <PropSlider
+          disabled={disabled}
           min={0}
           max={2}
           onChange={setContrast}
@@ -36,6 +38,7 @@ export default function SaturationController({
       </SettingsRow>
       <SettingsRow>
         <PropSlider
+          disabled={disabled}
           min={0}
           max={2}
           onChange={setBrightness}
@@ -51,6 +54,7 @@ export default function SaturationController({
       </SettingsRow>
       <SettingsRow>
         <PropSlider
+          disabled={disabled}
           min={0}
           max={2}
           onChange={setSaturation}
@@ -61,3 +65,5 @@ export default function SaturationController({
     </>
   )
 }
+
+export default SaturationController

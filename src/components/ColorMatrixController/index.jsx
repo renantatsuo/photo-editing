@@ -3,14 +3,15 @@ import { Typography } from 'antd'
 
 import { SettingsRow, PropSlider } from '../Common'
 
-export default function ColorMatrixController({
+const ColorMatrixController = ({
   red,
   setRed,
   green,
   setGreen,
   blue,
-  setBlue
-}) {
+  setBlue,
+  disabled
+}) => {
   return (
     <>
       <SettingsRow>
@@ -20,7 +21,14 @@ export default function ColorMatrixController({
         </Typography.Text>
       </SettingsRow>
       <SettingsRow>
-        <PropSlider min={0} max={2} onChange={setRed} value={red} step={0.01} />
+        <PropSlider
+          disabled={disabled}
+          min={0}
+          max={2}
+          onChange={setRed}
+          value={red}
+          step={0.01}
+        />
       </SettingsRow>
       <SettingsRow>
         <Typography.Text strong>Green</Typography.Text>
@@ -30,6 +38,7 @@ export default function ColorMatrixController({
       </SettingsRow>
       <SettingsRow>
         <PropSlider
+          disabled={disabled}
           min={0}
           max={2}
           onChange={setGreen}
@@ -45,6 +54,7 @@ export default function ColorMatrixController({
       </SettingsRow>
       <SettingsRow>
         <PropSlider
+          disabled={disabled}
           min={0}
           max={2}
           onChange={setBlue}
@@ -55,3 +65,5 @@ export default function ColorMatrixController({
     </>
   )
 }
+
+export default ColorMatrixController
