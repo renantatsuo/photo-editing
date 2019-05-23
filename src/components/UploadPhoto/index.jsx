@@ -5,31 +5,28 @@ import { fontSize } from '../Common'
 
 const UploadPhoto = ({ setPhoto }) => {
   const handleUpload = ({ file }) => {
-    let formData = new FormData()
+    const blob = URL.createObjectURL(file)
 
-    formData.append('image', file)
+    const img = new Image()
 
-    fetch('http://www.mocky.io/v2/5ce597692e00001272f83ecd', {
-      method: 'post',
-      body: formData
-    })
-      .then((res) => res.json())
-      .then(({ data }) => {
-        let ratio = data.width / data.height
-        let height = window.innerHeight - 8 * fontSize
-        let width = height * ratio
+    img.src = blob
 
-        if (width > window.innerWidth * 0.7 * 0.7) {
-          width = window.innerWidth * 0.7 * 0.7
-          height = width / ratio
-        }
+    img.onload = function() {
+      let ratio = this.width / this.height
+      let height = window.innerHeight - 8 * fontSize
+      let width = height * ratio
 
-        setPhoto({
-          url: data.link,
-          height: height,
-          width: width
-        })
+      if (width > window.innerWidth * 0.7 * 0.7) {
+        width = window.innerWidth * 0.7 * 0.7
+        height = width / ratio
+      }
+
+      setPhoto({
+        url: URL.createObjectURL(file),
+        height: height,
+        width: width
       })
+    }
   }
   return (
     <Upload.Dragger customRequest={handleUpload}>
